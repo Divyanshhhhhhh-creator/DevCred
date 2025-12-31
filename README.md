@@ -3,7 +3,7 @@
   <!-- Add your logo to assets/logo.png -->
   <img src="./assets/image.png" alt="TrustMyGit Logo" width="180" />
   
-  # TrustMyGit
+  # DevCred
   
   ### *Decentralized Developer Reputation & Staking Protocol*
 
@@ -41,7 +41,7 @@
 
 ## Overview
 
-**TrustMyGit** is a decentralized protocol that bridges the gap between GitHub contributions and blockchain-based reputation systems. It enables developers to:
+**DevCred** is a decentralized protocol that bridges the gap between GitHub contributions and blockchain-based reputation systems. It enables developers to:
 
 - Build **verifiable, on-chain reputation** from real GitHub activity
 - **Stake reputation** on issues and earn rewards for completed work
@@ -449,8 +449,8 @@ flowchart LR
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/Rishikpulhani/TrustMyGit.git
-cd TrustMyGit
+git clone https://github.com/Divyanshhhhhhh-creator/DevCred.git
+cd DevCred
 
 # 2. Install dependencies
 npm install
@@ -511,7 +511,7 @@ forge script script/Deploy.s.sol --rpc-url base-sepolia --broadcast
 ## Project Structure
 
 ```
-TrustMyGit/
+DevCred/
 ├── app/                             # Next.js App Router
 │   ├── api/                         # API Routes
 │   │   ├── auth/github/             # GitHub OAuth endpoints
