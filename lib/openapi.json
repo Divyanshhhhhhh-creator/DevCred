@@ -1,0 +1,349 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "TrustMyGit API",
+    "version": "1.0.0",
+    "description": "API for TrustMyGit - Developer Reputation & Token Platform"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api",
+      "description": "Development server"
+    }
+  ],
+  "paths": {
+    "/me": {
+      "get": {
+        "summary": "Get current user information",
+        "tags": ["User"],
+        "responses": {
+          "200": {
+            "description": "User information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ecosystems": {
+      "get": {
+        "summary": "Get all ecosystems",
+        "tags": ["Ecosystem"],
+        "responses": {
+          "200": {
+            "description": "List of ecosystems",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ecosystem"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ecosystems/{ecosystemId}": {
+      "get": {
+        "summary": "Get ecosystem details",
+        "tags": ["Ecosystem"],
+        "parameters": [
+          {
+            "name": "ecosystemId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ecosystem details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EcosystemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/developers/{devId}": {
+      "get": {
+        "summary": "Get developer information",
+        "tags": ["Developer"],
+        "parameters": [
+          {
+            "name": "devId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Developer information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Developer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stake-issues": {
+      "get": {
+        "summary": "Get stake issues for a project",
+        "tags": ["Staking"],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of stake issues",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StakeIssue"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stake": {
+      "post": {
+        "summary": "Stake on an issue",
+        "tags": ["Staking"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StakeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Staking result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StakeResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mint-token": {
+      "post": {
+        "summary": "Mint developer tokens",
+        "tags": ["Token"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MintTokenRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Minting result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MintTokenResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "githubHandle": { "type": "string" },
+          "walletAddress": { "type": "string" },
+          "displayName": { "type": "string" },
+          "avatarUrl": { "type": "string" },
+          "overallRepScore": { "type": "number" },
+          "ecosystems": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string" },
+                "name": { "type": "string" },
+                "score": { "type": "number" }
+              }
+            }
+          }
+        }
+      },
+      "Ecosystem": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "projectsCount": { "type": "number" },
+          "contributorsCount": { "type": "number" },
+          "totalRepPool": { "type": "number" }
+        }
+      },
+      "EcosystemDetails": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "projects": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string" },
+                "name": { "type": "string" },
+                "contributors": { "type": "number" },
+                "prs": { "type": "number" },
+                "topContributors": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "handle": { "type": "string" },
+                      "score": { "type": "number" }
+                    }
+                  }
+                },
+                "issuesCount": { "type": "number" }
+              }
+            }
+          }
+        }
+      },
+      "Developer": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "displayName": { "type": "string" },
+          "githubHandle": { "type": "string" },
+          "avatarUrl": { "type": "string" },
+          "totalRepScore": { "type": "number" },
+          "tokensMinted": { "type": "number" },
+          "tokenHistory": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": { "type": "string" },
+                "amount": { "type": "number" },
+                "price": { "type": "number" }
+              }
+            }
+          },
+          "contributions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "ecosystemId": { "type": "string" },
+                "projectId": { "type": "string" },
+                "prCount": { "type": "number" },
+                "description": { "type": "string" },
+                "url": { "type": "string" }
+              }
+            }
+          }
+        }
+      },
+      "StakeIssue": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "stakeAmountRequired": { "type": "number" },
+          "stakedBy": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "address": { "type": "string" },
+                "amount": { "type": "number" }
+              }
+            }
+          }
+        }
+      },
+      "StakeRequest": {
+        "type": "object",
+        "properties": {
+          "issueId": { "type": "string" },
+          "stakerAddress": { "type": "string" },
+          "amount": { "type": "number" }
+        }
+      },
+      "StakeResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "txHash": { "type": "string" }
+        }
+      },
+      "MintTokenRequest": {
+        "type": "object",
+        "properties": {
+          "developerId": { "type": "string" },
+          "amount": { "type": "number" }
+        }
+      },
+      "MintTokenResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "txHash": { "type": "string" },
+          "mintedAt": { "type": "string" }
+        }
+      }
+    }
+  }
+}
