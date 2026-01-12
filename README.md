@@ -674,6 +674,63 @@ cd contracts && forge test -vvv
 
 ---
 
+## 👥 Contributors
+
+### **Arjun Madhav**
+**1️⃣ System Design & Architecture**
+* Define problem statement & scope
+* Design overall system architecture
+* Decide reputation metrics & weights
+* Choose blockchain + wallet stack
+* Design GitHub → on-chain data flow
+* Security & trust assumptions
+* Documentation of architecture
+
+### **Ishan Aditya**
+**2️⃣ Frontend (Next.js / React)**
+* Project setup (Next.js, Tailwind, UI lib)
+* GitHub OAuth integration
+* Wallet connection (MetaMask / Wagmi)
+* User profile page
+* Reputation visualization UI
+* Issue staking UI
+* Token balance display
+* Transaction status handling
+* Error & loading states
+* Responsive layout
+* UI polish & UX improvements
+* Frontend env & config handling
+
+### **Divyansh Shukla**
+**3️⃣ Smart Contracts**
+* Contract architecture design
+* Developer token contract
+* Token factory contract
+* Issue staking contract
+* Bonding curve logic
+* Reward distribution logic
+* Access control & modifiers
+* Contract testing
+* Gas optimization
+* Deployment scripts
+* Contract documentation
+
+### **Tarun Kumar**
+**4️⃣ Backend & Reputation Engine**
+* GitHub API integration
+* Fetch PRs, commits, issues
+* Reputation scoring algorithm
+* Data normalization & weighting
+* TLSNotary / verification logic
+* Backend API routes
+* Blockchain interaction layer
+* Attestation generation
+* Error handling & retries
+* Backend configuration
+* Backend documentation
+
+---
+
 ## Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
